@@ -1,0 +1,73 @@
+@function random-color($colors) {
+    $length: length($colors);
+    $index: random($length);
+    @return nth($colors, $index);
+  }
+  
+  @function random-position($min, $max, $unit) {
+    $random-value: $min + random($max - $min + 1);
+    @return #{$random-value}#{$unit};
+  }
+  
+  @function generate-stars($count, $width-unit, $height-unit, $colors) {
+    $shadows: ();
+  
+    @for $i from 1 through $count {
+      $x: random-position(0, 100, $width-unit);
+      $y: random-position(0, 100, $height-unit);
+      $color: random-color($colors);
+      $shadows: append($shadows, #{$x} #{$y} 1px #{$color}, comma);
+    }
+  
+    @return $shadows;
+  }
+  
+  $star-colors: #dbdbfd, #ada9ff, #fe915a, #ffda6d, #fefefe, #cffe37;
+  
+  .stars {
+    position: relative;
+    width: 3px;
+    height: 3px;
+    border-radius: 100%;
+    box-shadow: generate-stars(100, "vw", "vh", $star-colors);
+    animation: anim-stars 20s linear infinite;
+  }
+  
+  .stars::after {
+    content: " ";
+    position: absolute;
+    top: 100vh;
+    width: 3px;
+    height: 3px;
+    border-radius: 100%;
+    box-shadow: inherit;
+  }
+  
+  .stars2 {
+    position: relative;
+    width: 1px;
+    height: 1px;
+    border-radius: 50%;
+    box-shadow: generate-stars(120, "vw", "vh", $star-colors);
+    animation: anim-stars 30s linear infinite;
+  }
+  
+  .stars2::after {
+    content: " ";
+    position: absolute;
+    top: 100vh;
+    width: 1px;
+    height: 2px;
+    border-radius: 50%;
+    box-shadow: inherit;
+  }
+  
+  @keyframes anim-stars {
+    from {
+      transform: translateY(0);
+    }
+    to {
+      transform: translateY(-100vh);
+    }
+  }
+  
