@@ -21,5 +21,7 @@ Este é um projeto de timer inspirado na série Doctor Who, desenvolvido utiliza
    `cd doctor-who-timer`
 3. Instale as dependências:
    `npm install`
-4. Inicie o servidor de desenvolvimento:
+4. Instale o sass:
+   `npm install -g sass`
+5. Inicie o servidor de desenvolvimento:
    `npm run dev`
