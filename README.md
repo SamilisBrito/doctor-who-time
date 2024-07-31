@@ -1,6 +1,6 @@
 # Doctor Who Timer
 
-[Click aqui para acessar landing page](https://doctor-who-time.vercel.app/)
+[Click aqui para acessar o timer](https://doctor-who-time.vercel.app/)
 
 Este é um projeto de timer inspirado na série Doctor Who, desenvolvido utilizando React. O timer foi implementado com o uso de hooks como `useState`, `useRef` e `useEffect`.
 
