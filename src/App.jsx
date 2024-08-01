@@ -7,6 +7,8 @@ import music from "./assets/doctorWho.mp3";
 
 function App() {
   const audioRef = useRef(null);
+  const secondRef = useRef(null);
+  const minuteRef = useRef(null);
   const [minute, setMinute] = useState("00");
   const [second, setSecond] = useState("00");
   const [start, setStart] = useState(false);
@@ -50,11 +52,17 @@ function App() {
     return String(value).padStart(2, "0");
   }
 
+  function handleFocus(valueRef) {
+    if (valueRef.current) {
+      valueRef.current.select();
+    }
+  }
+
   return (
     <>
       <section className="section">
-        <div class="stars"></div>
-        <div class="stars2"></div>
+        <div className="stars"></div>
+        <div className="stars2"></div>
         <div className="timer">
           <form className="form">
             <div className="form-content">
@@ -66,11 +74,12 @@ function App() {
                   value={formatTime(minute)}
                   onChange={(e) => {
                     const value = parseInt(e.target.value, 10);
-                    console.log('io', value)
                     if (value >= 0 && value <= 59) {
                       setMinute(value);
                     }
                   }}
+                  onFocus={() => handleFocus(minuteRef)}
+                  ref={minuteRef}
                   type="text"
                   min={0}
                   max={59}
@@ -83,14 +92,19 @@ function App() {
 
               <fieldset className="fieldset-second">
                 <label htmlFor="second">segundos</label>
+
                 <input
                   className="second"
                   itemID="second"
                   value={formatTime(second)}
                   onChange={(e) => {
                     const value = parseInt(e.target.value, 10);
-                    value >= 0 && value <= 59 && setSecond(value);
+                    if (value >= 0 && value <= 59) {
+                      setSecond(value);
+                    }
                   }}
+                  onFocus={() => handleFocus(secondRef)}
+                  ref={secondRef}
                   type="text"
                   min={0}
                   max={59}
