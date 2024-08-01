@@ -66,6 +66,7 @@ function App() {
                   value={formatTime(minute)}
                   onChange={(e) => {
                     const value = parseInt(e.target.value, 10);
+                    console.log('io', value)
                     if (value >= 0 && value <= 59) {
                       setMinute(value);
                     }
@@ -88,9 +89,7 @@ function App() {
                   value={formatTime(second)}
                   onChange={(e) => {
                     const value = parseInt(e.target.value, 10);
-                    if (value >= 0 && value <= 59) {
-                      setSecond(value);
-                    }
+                    value >= 0 && value <= 59 && setSecond(value);
                   }}
                   type="text"
                   min={0}
@@ -102,7 +101,7 @@ function App() {
             </div>
             <div className="buttons">
               <button
-                disabled={start}
+                disabled={minute == 0 && second == 0 ? !start : start}
                 className="btn-start material-symbols-outlined"
                 onClick={(e) => handleStart(e)}
               >
